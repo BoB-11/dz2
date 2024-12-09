@@ -36,12 +36,21 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
     }
 
     private Animal generateAnimal() {
+        String breed = random.nextBoolean() ? "PetBreed" + random.nextInt(5) : "PredatorBreed" + random.nextInt(5);
+        String name = "Name" + random.nextInt(100);
+        Double cost = random.nextDouble() * 100;
+        String character = random.nextBoolean() ? "Friendly" : "Aggressive";
+
+        // Генерация случайной даты рождения между 01-01-2000 и 31-12-2015
+        int year = random.nextInt(16) + 2000;
+        int month = random.nextInt(12) + 1;
+        int day = random.nextInt(28) + 1;
+        String birthDateStr = String.format("%02d-%02d-%04d", day, month, year);
+
         if (random.nextBoolean()) {
-            return new Pet("PetBreed" + random.nextInt(5), "PetName" + random.nextInt(5),
-                    random.nextDouble() * 100, "Friendly");
+            return new Pet(breed, name, cost, character, birthDateStr);
         } else {
-            return new Predator("PredatorBreed" + random.nextInt(5), "PredatorName" + random.nextInt(5),
-                    random.nextDouble() * 200, "Aggressive");
+            return new Predator(breed, name, cost, character, birthDateStr);
         }
     }
 }
